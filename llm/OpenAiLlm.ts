@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 import type { ChatCompletionMessageParam } from "openai/resources";
-import type { LlmConfig } from "../types";
+import type { LlmConfig, ChatMessage } from "../types";
 import type ILlm from "./ILlm";
 export default class OpenAiLlm implements ILlm {
   private _client: OpenAI;
@@ -16,17 +16,18 @@ export default class OpenAiLlm implements ILlm {
   }
 
   public async GetCompletion(
-    messages: ChatCompletionMessageParam[]
+    messages: ChatMessage[]
   ): Promise<string> {
     const response = await this._client.chat.completions.create({
-      messages,
+      messages: messages as ChatCompletionMessageParam[],
       model: this._modelName,
     });
 
-    if (response.choices[0]?.message.content) {
-      return response.choices[0].message.content;
+    const content = response.choices[0]?.message?.content;
+    if (content) {
+      return content;
     }
 
-    throw new Error("No response sent by the LLM");
+    throw new Error("OpenAI LLM returned empty response");
   }
 }

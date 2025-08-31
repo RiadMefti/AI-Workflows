@@ -1,9 +1,9 @@
-import type { PromptChainStep } from "./PromptChainStep";
+import type LlmTask from "../../llm/LlmTask";
 
 export class PromptChain {
-  private _steps: PromptChainStep[] = [];
+  private _steps: LlmTask[] = [];
 
-  public addStep(step: PromptChainStep): PromptChain {
+  public addStep(step: LlmTask): PromptChain {
     this._steps.push(step);
     return this;
   }

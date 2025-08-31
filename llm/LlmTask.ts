@@ -1,17 +1,21 @@
-import LlmFactory from "../../llm/LlmFactory";
-import { Llms, type LlmConfig } from "../../types";
+import LlmFactory from "./LlmFactory";
+import type { LlmConfig, Llms, ChatMessage } from "../types";
 
-export class PromptChainStep {
+export default class LlmTask {
+  private _systemRequirements: string;
   private _llm;
-  private _systemRequirements;
 
   constructor(llms: Llms, llmConfig: LlmConfig, systemRequirements: string) {
     this._llm = LlmFactory(llms, llmConfig);
     this._systemRequirements = systemRequirements;
   }
 
+  get systemRequirements() {
+    return this._systemRequirements;
+  }
+
   public async execute(input: string): Promise<string> {
-    const prompt = [
+    const prompt: ChatMessage[] = [
       { role: "system", content: this._systemRequirements },
       { role: "user", content: input },
     ];

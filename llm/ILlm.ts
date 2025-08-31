@@ -1,3 +1,5 @@
+import type { ChatMessage } from "../types";
+
 export default interface ILlm {
-  GetCompletion(messages: object[]): Promise<string>;
+  GetCompletion(messages: ChatMessage[]): Promise<string>;
 }
