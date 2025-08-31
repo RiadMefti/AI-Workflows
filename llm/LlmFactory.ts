@@ -1,6 +1,6 @@
-import type ILlm from "./Illm";
 import OpenAiLlm from "./OpenAiLlm";
 import { Llms, type LlmConfig } from "../types";
+import type ILlm from "./ILlm";
 
 export default function LlmFactory(llms: Llms, llmConfig: LlmConfig): ILlm {
   switch (llms) {

@@ -1,7 +1,8 @@
 import OpenAI from "openai";
-import type ILlm from "./Illm";
+
 import type { ChatCompletionMessageParam } from "openai/resources";
 import type { LlmConfig } from "../types";
+import type ILlm from "./ILlm";
 export default class OpenAiLlm implements ILlm {
   private _client: OpenAI;
   private _modelName: string;
