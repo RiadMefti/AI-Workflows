@@ -1,7 +1,7 @@
 import LlmFactory from "../../llm/LlmFactory";
 import type { LlmConfig, Llms, ChatMessage } from "../../types";
 import type LlmTask from "../../llm/LlmTask";
-import { systemRequirements } from "./prompts";
+import { systemRequirements } from "./Prompts";
 
 export default class LlmRouter {
   private _routes: Map<string, LlmTask> = new Map();
